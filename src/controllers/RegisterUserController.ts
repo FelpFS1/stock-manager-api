@@ -2,8 +2,8 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { RegisterUser } from "../services/auth/RegisterUser"; 
 import bcrypt from "bcrypt";
 import prismaClient from "../prisma";
-
-class RegisterUserController {
+import { LoginUser } from "../services/auth/LoginUser";
+export class RegisterUserController {
   async handle(request: FastifyRequest, reply: FastifyReply) {
     const { name, email, password } = request.body as {
       name: string;
@@ -24,5 +24,3 @@ class RegisterUserController {
     reply.send(user);
   }
 }
-
-export { RegisterUserController };

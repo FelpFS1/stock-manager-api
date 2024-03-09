@@ -1,16 +1,9 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import prismaClient from "../../prisma";
 import { ParamsProps } from "../../interfaces/ParamsIdProps";
-interface ProductProps {
-  name: string;
-  quantity: number;
-  price: number;
-  category: string;
-  description: string;
-}
+import { ProductProps } from "../../interfaces/ProductProps";
 
-
-export class AddProductController {
+export class AddProduct{
   async handle(
     request: FastifyRequest<{ Params: ParamsProps }>,
     reply: FastifyReply

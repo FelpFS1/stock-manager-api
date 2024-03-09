@@ -15,7 +15,6 @@ export class LoginUser {
     return reply.code(401).send("Email não existe no banco de dados!")
 
     const matchPassword = await bcrypt.compare(password,user.password)
-    console.log(matchPassword)
 
     if(!matchPassword){
       return reply.code(401).send("Senha invalida!")
@@ -34,10 +33,7 @@ export class LoginUser {
 
   async getUser(request:FastifyRequest,reply:FastifyReply){
     const tokenHeader = request.headers['authorization']
-  
-
     const token = tokenHeader && tokenHeader.split(' ')[1]
-    
     
     if (!token) {
         reply.code(401).send({ message: 'Token JWT não fornecido' });
@@ -46,12 +42,10 @@ export class LoginUser {
 
     try {
         const decoded= jwt.verify(token, process.env.JWT_SECRET as string) as {userId:string};
-        console.log(token);
         const userLogged = prismaClient.user.findMany({where:{id:decoded.userId}})
         return userLogged
     } catch (error) {
-        console.error('Erro ao verificar token JWT:', error);
-        reply.code(403).send("Token JWT inválido"); // Código de status 403 para token inválido
+        reply.code(403).send("Token JWT inválido"); 
     }
 
 }
