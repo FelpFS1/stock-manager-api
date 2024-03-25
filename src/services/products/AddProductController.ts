@@ -3,7 +3,7 @@ import prismaClient from "../../prisma";
 import { ParamsProps } from "../../interfaces/ParamsIdProps";
 import { ProductProps } from "../../interfaces/ProductProps";
 
-export class AddProduct{
+export class AddProduct {
   async handle(
     request: FastifyRequest<{ Params: ParamsProps }>,
     reply: FastifyReply
@@ -33,6 +33,6 @@ export class AddProduct{
         },
       },
     });
-    return product;
+    return reply.send({ message: "Sucess",product });
   }
 }

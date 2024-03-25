@@ -14,6 +14,6 @@ export class DeleteProduct{
         }
 
         await prismaClient.products.delete({where:{id:paramsId}})
-        reply.send("Product deletado!")
+        return reply.send({message:"Sucess",product:product})
     }
 }

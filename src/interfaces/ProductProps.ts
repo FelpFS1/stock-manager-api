@@ -4,4 +4,6 @@ export interface ProductProps {
     price: number;
     category: string;
     description: string;
+    createdAt: string;
+    updatedAt:string
   }

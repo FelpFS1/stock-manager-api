@@ -12,7 +12,7 @@ export class UpdateProduct{
         const {productId, userId}= request.params
         console.log(productId);
         
-        const { name, quantity, price, category, description } =
+        const { name, quantity, price, category, description,updatedAt } =
       request.body as ProductProps;
         const product = await prismaClient.products.findFirst({where:{
             id:productId,
@@ -34,6 +34,7 @@ export class UpdateProduct{
                 price,
                 category,
                 description,
+                updatedAt,
                 user: {
                   connect: {
                     id: userId,
@@ -41,7 +42,6 @@ export class UpdateProduct{
                 },
               },
         })
-
-        return productUpdate
+        return {message:'Sucess',product:productUpdate}
     }
 }

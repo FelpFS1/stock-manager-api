@@ -22,7 +22,6 @@ export async function routers(
   options: FastifyPluginOptions
 ) {
   fastify.get("/", async (request: FastifyRequest<{Params:ParamsProps}>, reply: FastifyReply) => {
-    const params = request.params
     const users = await prismaClient.user.findMany();
 
    return users

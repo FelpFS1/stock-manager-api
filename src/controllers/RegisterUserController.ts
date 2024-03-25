@@ -2,7 +2,6 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { RegisterUser } from "../services/auth/RegisterUser"; 
 import bcrypt from "bcrypt";
 import prismaClient from "../prisma";
-import { LoginUser } from "../services/auth/LoginUser";
 export class RegisterUserController {
   async handle(request: FastifyRequest, reply: FastifyReply) {
     const { name, email, password } = request.body as {
@@ -17,7 +16,7 @@ export class RegisterUserController {
       },
     });
     if (existUser) {
-      return reply.code(409).send("Usuário já cadastrado.");
+      return reply.send({message:"⚠️ Usuário já cadastrado. ⚠️"});
     }
     const passwordHash = await bcrypt.hash(password, 10);
     const user = await userService.execute({ name, email, passwordHash });
